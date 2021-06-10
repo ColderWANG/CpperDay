@@ -1,9 +1,12 @@
-# Vscode Git配置
-- [Vscode Git配置](#vscode-git配置)
-  - [vscode git配置](#vscode-git配置-1)
+# Vscode Git
+- [Vscode Git](#vscode-git)
+  - [vscode git配置](#vscode-git配置)
     - [ssh配置](#ssh配置)
     - [vscode 源代码管理配置](#vscode-源代码管理配置)
+    - [配置可能遇到的问题](#配置可能遇到的问题)
   - [vscode Github推拉流](#vscode-github推拉流)
+  - [Git学习](#git学习)
+- [笔记目录](#笔记目录)
 
 ------------------------------
 ## vscode git配置
@@ -26,10 +29,27 @@
 >3. 使用 `ssh -T git@github.com` 测试一下连接
 
 ### vscode 源代码管理配置
->1. 点击vscode中的源代码管理，在本地指定文件夹下初始化本地仓库，在指定文件夹下面会得到.git文件夹
->2. 添加远程存储库,在弹出的命令行中依次输入Github中项目的ssh连接网址和名称（origin）。![avatar](./picture/add_remote.png)
->3. 通过git config确认配置情况。![avatar](./picture/git_config.png)
+>1. 点击 vscode 中的源代码管理，在本地指定文件夹下初始化本地仓库，在指定文件夹下面会得到 .git 文件夹
+>2. 添加远程存储库,在弹出的命令行中依次输入 Github 中项目的 ssh 连接网址和名称 （origin）。![avatar](./picture/add_remote.png)
+>3. 通过 git config 确认配置情况。![avatar](./picture/git_config.png)
+
+### 配置可能遇到的问题
+>1. ssh 超时解决方案：在.ssh文件夹下新建config文件。输入    
+>```Host github.com  
+>User 371774232@qq.com  
+>Hostname ssh.github.com  
+>PreferredAuthentications publickey  
+>IdentityFile ~/.ssh/id_rsa  
+>Port 443
+>```
 
 ## vscode Github推拉流
-> * 拉流：在源代码管理处选取拉去自，在如下弹出的命令行中可以选择 `origin` 及分支。![avatar](./picture/git_pull.png)
-> * 推流：更改文件后，在源代码管理中可以看到更改，先点击提交，并写入提交信息，再选取推送至。
+>* 拉流：在源代码管理处选取拉去自，在如下弹出的命令行中可以选择 `origin` 及分支。![avatar](./picture/git_pull.png)
+>* 推流：更改文件后，在源代码管理中可以看到更改，先点击提交，并写入提交信息，再选取推送至。
+
+## Git学习
+
+# 笔记目录
+- C++
+- 深入理解计算机系统（原书第三版）
+- C++STL及泛型编程-侯捷著
