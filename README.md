@@ -6,6 +6,9 @@
     - [配置可能遇到的问题](#配置可能遇到的问题)
   - [vscode Github推拉流](#vscode-github推拉流)
   - [Git学习](#git学习)
+    - [基本查看指令](#基本查看指令)
+    - [remote 远程仓处理](#remote-远程仓处理)
+    - [branch 分支处理](#branch-分支处理)
 ----------------------------
 # 笔记目录
 - [C++](./C++/)
@@ -53,3 +56,37 @@
 >* 推流：更改文件后，在源代码管理中可以看到更改，先点击提交，并写入提交信息，再选取推送至。
 
 ## Git学习
+
+### 基本查看指令
+1. 查看配置
+   ```
+   查看 git
+   git config
+
+   查看 remote
+   git remote -v
+
+   列出 branch
+   git branch
+   ```
+
+
+### remote 远程仓处理
+1. 连接远程仓
+   ```
+   git remote add <name> <url> //name 为默认origin
+   ```
+2. 删除远程仓
+   ```
+   git remote remove <name> 
+   ```
+
+### branch 分支处理
+1. 删除分支
+   ```
+   删除本地分支
+   git branch -D branchname
+   
+   删除远程分支
+   git push origin --delete branchname
+   ```
