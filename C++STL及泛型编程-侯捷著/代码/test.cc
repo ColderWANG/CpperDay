@@ -4,8 +4,21 @@
 #include <cstdlib> //abort()
 #include <cstdio> //snprintf()
 #include <ctime>
-#include <algorithm> //sort()
+#include <algorithm> //sort() find()
 #include <map>
+#include <list>
+
+#include <cstddef>
+#include <memory> //内含std::allocator
+#include <ext/array_allocator.h>   
+#include <ext/mt_allocator.h>       //多线程
+#include <ext/debug_allocator.h>    //调试
+#include <ext/pool_allocator.h>     //内存池
+#include <ext/bitmap_allocator.h>
+#include <ext/malloc_allocator.h>
+#include <ext/new_allocator.h>
+
+
 
 using std::endl;
 using std::cin;
@@ -13,6 +26,8 @@ using std::cout;
 using std::string; 
 using std::vector;
 using std::multimap;
+using std::list;
+
 long get_a_target_long(){
 long target = 0;
 
@@ -109,7 +124,37 @@ namespace jj02{
         else cout << "not found! " << endl;
     }
 }
+namespace jj20{
+    void test_list_with_special_allocator(){
+        cout << "\ntest_list_with_special_allocator()...";
 
+    list<string,std::allocator<string>> c1;
+    list<string,__gnu_cxx::malloc_allocator<string>> c2;
+    list<string,__gnu_cxx::new_allocator<string>> c3;
+    list<string,__gnu_cxx::__pool_alloc<string>> c4;
+    list<string,__gnu_cxx::__mt_alloc<string>> c5;
+    list<string,__gnu_cxx::bitmap_allocator<string>> c6;
+    list<string,__gnu_cxx::array_allocator<string>> c7;
+    list<string,__gnu_cxx::debug_allocator<string>> c8;
+    int choice;
+    long value;
+
+        cout << "select: ";
+        cin >> choice;
+        if(choice != 0){
+            cout << "how many elements: ";
+            cin >> value;
+        }
+
+    char buf[10];
+    clock_t timeStart = clock();
+
+        for(long i = 0; i < value; ++i){
+            try
+        }
+    }
+
+}
 int main(){
     long value = 1000000;
     //jj02::test_vector(value);
