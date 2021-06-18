@@ -18,8 +18,6 @@
 #include <ext/malloc_allocator.h>
 #include <ext/new_allocator.h>
 
-
-
 using std::endl;
 using std::cin;
 using std::cout;
@@ -134,8 +132,8 @@ namespace jj20{
     list<string,__gnu_cxx::__pool_alloc<string>> c4;
     list<string,__gnu_cxx::__mt_alloc<string>> c5;
     list<string,__gnu_cxx::bitmap_allocator<string>> c6;
-    list<string,__gnu_cxx::array_allocator<string>> c7;
-    list<string,__gnu_cxx::debug_allocator<string>> c8;
+    //list<string,__gnu_cxx::array_allocator<string>> c7;
+    //list<string,__gnu_cxx::debug_allocator<string>> c8;
     int choice;
     long value;
 
@@ -150,13 +148,31 @@ namespace jj20{
     clock_t timeStart = clock();
 
         for(long i = 0; i < value; ++i){
-            try
+            try{
+                snprintf(buf,10,"%ld",i);
+                switch(choice){
+                    case 1: c1.push_back(string(buf));break;
+                    case 2: c2.push_back(string(buf));break;
+                    case 3: c3.push_back(string(buf));break;
+                    case 4: c4.push_back(string(buf));break;
+                    case 5: c5.push_back(string(buf));break;
+                    case 6: c6.push_back(string(buf));break;
+                    //case 7: c7.push_back(string(buf));break;
+                    //case 8: c8.push_back(string(buf));break;
+                    default:break;
+                }
+            }
+            catch(std::exception& p){
+                cout << "i = " << i << " " << p.what() << endl;
+                abort();
+            }
         }
+        cout << "a lot of push_back(), micro-seconds :" << (clock() - timeStart) << endl;
     }
-
 }
 int main(){
     long value = 1000000;
     //jj02::test_vector(value);
-    jj02::test_multimap(value);
+    //jj02::test_multimap(value);
+    jj20::test_list_with_special_allocator();
 }
