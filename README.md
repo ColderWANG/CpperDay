@@ -90,3 +90,12 @@
    删除远程分支
    git push origin --delete branchname
    ```
+
+2. 新建分支
+  ```
+  git branch branchname
+  ```
+3. 切换分支
+  ```
+  git checkout branchname
+  ```
