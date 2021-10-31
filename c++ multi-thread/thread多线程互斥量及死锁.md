@@ -1,0 +1,18 @@
+
+### 互斥量
+#### std::mutex 类
+是一个类对象，理解成一把锁，通过 lock() 成员函数锁定，多个线程同时用时只有一个能成功返回，其他线程会卡在 lock() 内部不断尝试。**步骤**：先用 lock() 锁住数据，操作数据，再用 unlock() 解锁数据。
+
+#### std::lock_guard 类模板
+一个 lock 必须对应一个 unlock ，而 lock_guard 可以防止这种情况，同时取代 lock() 和 unlock() ，不能**和其同时出现**。在 lock_guard 构造函数里执行了 lock ，在析构函数里执行 unlock，所以应在需要被保护的函数里创建对象。**巧用局部变量的生命周期**      
+```cpp
+//调用展示
+std::lock_guard<std::mutex> stguard(my_mutex);  //以下两行不能出现
+//my_mutex.lock()
+//my_mutex.unlock()
+```    
+如果线程共享数据在一个大函数内，可以通过{}来**隔离作用域**。
+
+
+### 死锁
+死锁问题由两个互斥量才能产生
