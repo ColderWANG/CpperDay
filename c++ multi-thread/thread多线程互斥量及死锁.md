@@ -7,6 +7,7 @@
 一个 lock 必须对应一个 unlock ，而 lock_guard 可以防止这种情况，同时取代 lock() 和 unlock() ，不能**和其同时出现**。在 lock_guard 构造函数里执行了 lock ，在析构函数里执行 unlock，所以应在需要被保护的函数里创建对象。**巧用局部变量的生命周期**      
 ```cpp
 //调用展示
+std::mutex my_mutex
 std::lock_guard<std::mutex> stguard(my_mutex);  //以下两行不能出现
 //my_mutex.lock()
 //my_mutex.unlock()
@@ -15,4 +16,8 @@ std::lock_guard<std::mutex> stguard(my_mutex);  //以下两行不能出现
 
 
 ### 死锁
-死锁问题由两个互斥量才能产生
+死锁问题由两个互斥量才能产生。   
+假如有两个缩，金锁和银锁   
+线程1：先锁金锁，再去锁银锁。  
+线程2：先锁银锁，再去锁金锁。  
+两个线程经过第一步的时候没问题，在第二步的时候就僵持住了，后面程序无法进行。
