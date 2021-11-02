@@ -44,4 +44,18 @@ sbguard1.lock();
  ```
 
  ### unique_lock 所有者的传递
- unique_lock 管理一个 mutex 的指针，
+ unique_lock 绑定一个 mutex 的指针，所有权是可以转移的，但是不能被复制    
+ 1. stf::move 函数转移所有权
+ 2. 通过函数返回一个局部临时对象，实例化
+```cpp
+//第一种方法
+std::unique_lock<std::mutex> sbguard1(my_mutex1);              //sbguard1 拥有 my_mutex1
+std::unique_lock<std::mutex> sbguard2(std::move(sbguard1));    //my_mutex1 所有权转移到 sbguard2
+
+//第二种方法
+std::unique_lock<std::mutex> rtn_unique_lock(){
+    std::unique_lock<std::mutex> tempguard(my_mutex1); 
+    return tempguard;                                          //返回局部对象 tempguard 会导致系统生成临时 unique_lock 对象，并调用 unique_lock 的移动构造函数
+}
+std::unique_lock<std::mutex> sbguard2 = rtn_unique_lock();
+```
