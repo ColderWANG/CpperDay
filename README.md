@@ -9,6 +9,7 @@
     - [基本查看指令](#基本查看指令)
     - [remote 远程仓处理](#remote-远程仓处理)
     - [branch 分支处理](#branch-分支处理)
+    - [git 推流流程](#git-推流流程)
 ----------------------------
 # 笔记目录
 - [C++](./C++/)
@@ -99,3 +100,25 @@
   ```
   git checkout branchname
   ```
+
+### git 推流流程
+1. 查看文件更改
+  ```
+  git status -s   -s是简短输出
+  ```
+2. 针对更改添加到暂存库
+  ```
+  git add [file1] [file2]   添加指定文件
+  git add [dir]             添加指定目录下更改文件
+  git .                     添加当前目录下所有更改文件
+  ```
+3. 提交暂存库到本地仓库 
+  ```
+  git commit -m [message] 
+  git commit [file1] [file2] -m [message]  提交指定文件
+  git commit -am [message]                 添加提交一键操作
+  ```          
+4. 推流
+  ```
+  git push [远程主机名] [本地分支名]:[远程分支名]   
+  git push [远程主机名] [本地分支名]                若远程分支和本地分支名相同则可以这样
