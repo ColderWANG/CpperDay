@@ -52,6 +52,13 @@
 >Port 443
 >```
 
+>2. 找不到 github 的host。通过
+>```
+>sudo vim /etc/hosts
+>末尾输入
+>140.82.114.4 github.com
+>```
+
 ## vscode Github推拉流
 >* 拉流：在源代码管理处选取拉去自，在如下弹出的命令行中可以选择 `origin` 及分支。![avatar](./picture/git_pull.png)
 >* 推流：更改文件后，在源代码管理中可以看到更改，先点击提交，并写入提交信息，再选取推送至。
