@@ -28,7 +28,8 @@
 4. Path Intellisense
 5. Bracket Pair Colorizer
 6. Project Manager
-
+7. vscode-mindmap
+8. draw.io
 
 # Vscode Git
 ## vscode git配置
