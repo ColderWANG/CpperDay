@@ -1,4 +1,6 @@
 - [笔记目录](#笔记目录)
+- [Vscode](#vscode)
+  - [推荐插件](#推荐插件)
 - [Vscode Git](#vscode-git)
   - [vscode git配置](#vscode-git配置)
     - [ssh配置](#ssh配置)
@@ -17,6 +19,16 @@
   - 1.操作系统-有符号数到无符号数隐式转化引出的错误
 - [C++STL及泛型编程-侯捷著](./C++STL及泛型编程-侯捷著/)
   - 1.C++STL体系结构基础介绍
+# Vscode
+## 推荐插件
+
+1. Code Runner
+2. filesize
+3. MarkDown All in one
+4. Path Intellisense
+5. Bracket Pair Colorizer
+6. Project Manager
+
 
 # Vscode Git
 ## vscode git配置
