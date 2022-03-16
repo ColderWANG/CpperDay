@@ -7,6 +7,10 @@ struct TreeNode {
      TreeNode(int x) : val(x), left(nullptr), right(nullptr) { }
 };
 ```
+#### 二叉树的一些性质
+二叉树的节点 n 和其深度 d 的计算公式是：
+$$ n = 2^d-1 $$
+所以求根到叶子结点的路径的空间复杂度最差为O(d) = O(logn)
 
 ### 二叉数先序遍历
 搜索次序为父左右
