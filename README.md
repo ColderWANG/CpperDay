@@ -95,9 +95,14 @@ sudo vim /etc/hosts
 ```
 git config --global http.postBuffer 524288000
 ```
-3. 文件大,上传慢,把远程仓库的上传由原来的HTTPS改为SSH上传 (似乎并没有好转)
+3. 文件大,上传慢,把远程仓库的上传由原来的HTTPS改为SSH上传 (似乎并没有好转,并没有http快)
 ```
 git remote set-url origin [你的ssh地址]
+
+vim /etc/ssh/ssh_config
+搜索 GSSAPIAuthentication 找到该配置项
+配置禁用 GSSAPI 校验：默认使用 # 号注释掉了
+保存退出
 ```
    
 
