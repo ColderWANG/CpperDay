@@ -9,11 +9,13 @@
   - [vscode Github推拉流](#vscode-github推拉流)
   - [Git学习](#git学习)
     - [git linux下遇到的一些问题](#git-linux下遇到的一些问题)
+    - [git代理设置](#git代理设置)
     - [基本查看指令](#基本查看指令)
     - [remote 远程仓处理](#remote-远程仓处理)
     - [branch 分支处理](#branch-分支处理)
     - [git 推流流程](#git-推流流程)
     - [git 跟踪与取消跟踪](#git-跟踪与取消跟踪)
+    - [git 暂存区和版本库操作](#git-暂存区和版本库操作)
   - [Git CLI学习](#git-cli学习)
     - [安装与登录](#安装与登录)
 ----------------------------
@@ -104,9 +106,35 @@ vim /etc/ssh/ssh_config
 配置禁用 GSSAPI 校验：默认使用 # 号注释掉了
 保存退出
 ```
-   
+4. 无法上传 bin 文件 以及 pdf文件,安装git-lfs
+```
+sudo apt-get install git-lfs
+切换到 git 工作区
+git lfs install
+这个指令是把大文件添加到 lfs 中
+git lfs track "*.pdf"
+然后可以 ls 看一下，当前目录应该会多出一个 .gitattributes文件，使用git add 加入缓存
+git add .gitattributes
+```
 
 
+### git代理设置
+```
+// 查看当前代理设置
+git config --global http.proxy
+git config --global https.proxy
+
+// 设置当前代理为 http://127.0.0.1:1089 或 socket5://127.0.0.1:1089
+git config --global http.proxy 'http://127.0.0.1:1089'
+git config --global https.proxy 'http://127.0.0.1:1089'
+
+git config --global http.proxy 'socks5://127.0.0.1:1089'
+git config --global https.proxy 'socks5://127.0.0.1:1089'
+
+// 删除 proxy
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
 ### 基本查看指令
 1. 查看配置
    ```
@@ -193,6 +221,24 @@ vim /etc/ssh/ssh_config
   ```
 3. 提交并推送
 
+### git 暂存区和版本库操作
+1. 把暂存区中的文件删除，不删除工作区文件（删除错误提交的 add）
+```
+git rm --cache 文件名
+```
+2. 删除版本库中的文件（删除错误提交的 commit）
+```
+//仅仅只是撤销已提交的版本库，不会修改暂存区和工作区
+git reset --soft 版本库ID
+//仅仅只是撤销已提交的版本库和暂存区，不会修改工作区
+git reset --mixed 版本库ID
+//彻底将工作区、暂存区和版本库记录恢复到指定的版本库
+git reset --hard 版本库ID
+```
+那我们到底应该用哪个选项好呢？
+    （1）如果你是在提交了后，对工作区的代码做了修改，并且想保留这些修改，那么可以使用git reset --mixed 版本库ID，注意这个版本库ID应该不是你刚刚提交的版本库ID，而是刚刚提交版本库的上一个版本库。如下图：
+    （2）如果不想保留这些修改，可以直接使用彻底的恢复命令，git reset --hard 版本库ID。
+    （3）为什么不使用--soft呢，因为它只是恢复了版本库，暂存区仍然存在你错误提交的文件索引，还需要进一步使用上一节的删除错误添加到暂存区的文件，
 
 ## Git CLI学习
 ### 安装与登录
