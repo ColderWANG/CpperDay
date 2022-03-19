@@ -69,7 +69,7 @@ IdentityFile ~/.ssh/id_rsa
 Port 443
 ```
 
-2. 找不到 github 的host。通过https://www.ipaddress.com/上查询github.com和github.global.ssl.fastly.net最快的ip
+2. 找不到 github 的host。通过 https://www.ipaddress.com/ 上查询github.com和github.global.ssl.fastly.net最快的ip
 ```
 sudo vim /etc/hosts
 末尾输入
@@ -82,7 +82,7 @@ sudo vim /etc/hosts
 
 ## Git学习
 ### git linux下遇到的一些问题
-1. 下载或推送慢，需要修改hosts，去https://www.ipaddress.com/上查询github.com和github.global.ssl.fastly.net最快的ip
+1. 下载或推送慢，需要修改hosts，去 https://www.ipaddress.com/ 上查询github.com和github.global.ssl.fastly.net最快的ip
 ```
 sudo vim /etc/hosts
 末尾输入 (2022.3.16有效)
