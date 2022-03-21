@@ -78,11 +78,92 @@ bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
     else return false;
 }
 
+
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = NULL;
+        random = NULL;
+    }
+};
+//输入当前对应的两个节点，得到当前n的 random 索引
+void random_get(Node* n,Node* dupn, vector<int> &vec){
+    Node* tempn = n->random;
+    int index = 0;
+    if(tempn == nullptr)vec.push_back(-1);
+    else{
+        while(tempn != n && tempn != nullptr){
+            index++;
+            tempn = tempn->next;
+        }
+        if(tempn == n)
+            vec.push_back(vec.size() - index); 
+        else 
+            vec.push_back(-index - 1);   //randon在节点后方，存入距离null距离 - 1；
+    }
+}
+Node* copyRandomList(Node* head) {
+    if(head == nullptr)return nullptr;
+    //建立一个数组存储 random 的地址
+    vector<int> random_vec;
+    Node *duphead = new Node(head->val);
+    random_get(head,duphead,random_vec);
+    Node *n = head->next, *dupn = duphead;
+    while(n != nullptr){
+        Node *t = new Node(n->val);
+        dupn->next = t;
+        random_get(n,dupn->next,random_vec);
+        n = n->next;
+        dupn = dupn->next;
+    }
+    //再来一遍循环连接 random 链表
+    dupn = duphead;
+    for(int i = 0; i < random_vec.size(); i++){
+        Node* p = duphead;
+        int count = 0, index = random_vec[i];
+        if(index < 0){
+            if(index == -1){
+                dupn = dupn->next;
+                continue;
+            }
+            else index = random_vec.size() + index + 1;
+        }
+        while(count != index){
+            p = p->next;
+            count++;
+        }
+        dupn->random = p;
+        dupn = dupn->next;
+    }
+    return duphead;
+}
+
+
 int main(){
-    vector<int> pu{2,3,0,1};
-    vector<int> po{0,3,2,1};
-    bool ans = validateStackSequences(pu,po);
-    cout << ans << endl;
+
+    Node * head = new Node(7);
+    Node * n2 = new Node(13);
+    Node * n3 = new Node(11);
+    Node * n4 = new Node(10);
+    Node * n5 = new Node(1);
+    head ->next = n2;
+    n2->next = n3;
+    n3->next = n4;
+    n4->next = n5;
+    head->random = nullptr;
+    n2->random = head;
+    n3->random = n5;
+    n4->random = n3;
+    n5->random = head;
+
+    Node *copyhead = copyRandomList(head);
+
 }
 /**
  * Your MinStack object will be instantiated and called as such:
