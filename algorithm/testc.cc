@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 class MinStack {
 public:
@@ -77,11 +78,19 @@ bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
     if(push_ == 0)return true;
     else return false;
 }
-
+char firstUniqChar(string s) {
+    if(s.empty())return ' ';
+    string::iterator ans = s.begin();
+    sort(s.begin(),s.end());
+    for(; ans < s.end() - 1; ans++){
+        if(*ans != *(ans + 1))break;
+    }
+    if(s.size() > 1 && *ans == *(ans - 1))return ' ';
+    else return *ans;
+}
 int main(){
-    vector<int> pu{2,3,0,1};
-    vector<int> po{0,3,2,1};
-    bool ans = validateStackSequences(pu,po);
+    string a = "leetcode";
+    char ans = firstUniqChar(a);
     cout << ans << endl;
 }
 /**
