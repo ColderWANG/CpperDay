@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
+
 using namespace std;
 class MinStack {
 public:
@@ -88,9 +90,60 @@ char firstUniqChar(string s) {
     if(s.size() > 1 && *ans == *(ans - 1))return ' ';
     else return *ans;
 }
+
+int maxValue(vector<vector<int>>& grid) {
+    if(grid.empty())return 0;
+    int i = 0, j = 0;
+    int maxv = grid[i][j];
+    //循环，第一层循环把所有点通过最大值连接，建立哈希表，确定每个点的最大val
+    unordered_map<int,int> m;
+    for(i = 0; i < grid.size(); i++){
+        for(j = 0; j < grid[0].size(); j++){
+            if(i == 0 && j == 0)m[0] = maxv;
+            else if(i == 0 && j != 0){
+                maxv = grid[i][j] + m[j - 1];
+                m[j] = maxv;
+            }
+            else if(j == 0 && i != 0){
+                maxv = grid[i][j] + m[grid.size()*(i-1)];
+                m[grid[0].size()*i] = maxv;
+            }
+            else {
+                maxv = max(grid[i][j] + m[j+grid.size()*i - 1], grid[i][j] + m[j+grid.size()*(i-1)]);
+                m[j+grid[0].size()*i] = maxv;
+            }
+        }
+    }
+    return m[grid[0].size()-1 + grid[0].size()*(grid.size()-1)];
+}
+int lengthOfLongestSubstring(string s) {
+    string ss = "";
+    int maxlen = 0;
+    for(auto c : s){
+        int index = ss.rfind(c);
+        if(index == string::npos)ss.push_back(c);
+        else {
+            int l = ss.length();
+            if(l > maxlen)maxlen = l;
+            ss.erase(0,index + 1);
+            ss.push_back(c);
+        }
+    }
+    if(ss.length() > maxlen)maxlen = ss.length();
+    return maxlen;
+}
 int main(){
-    string a = "leetcode";
-    char ans = firstUniqChar(a);
+    // vector<vector<int>> g;
+    // vector<int> a = {1,2,5};
+    // vector<int> b = {3,2,1};
+    //vector<int> c = {4,2,1};
+    // g.push_back(a);
+    // g.push_back(b);
+    //g.push_back(c);
+    string s = "asdfasffgoiv";
+    int ans;
+    ans = lengthOfLongestSubstring(s);
+
     cout << ans << endl;
 }
 /**
